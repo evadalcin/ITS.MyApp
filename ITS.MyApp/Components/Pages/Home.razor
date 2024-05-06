@@ -10,7 +10,7 @@
    href="/create">Create new url</a>
 
 <hr />
-
+@* 
 @foreach (var item in _list)
 {
     <div>
@@ -21,7 +21,7 @@
         <a class="btn btn-warning" href="/delete/@item.Id">Delete</a>
     </div>
     <hr />
-}
+} *@
 
 @code {
     private IEnumerable<Student> _list = [];

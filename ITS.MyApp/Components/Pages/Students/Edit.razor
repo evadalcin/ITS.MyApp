@@ -1,0 +1,71 @@
+﻿@page "/Students/edit/{id:int}"
+@inject StudentService Data
+@inject NavigationManager Nav
+
+<h3>Edit student</h3>
+
+<EditForm Model="NewStudent"
+          FormName="CreateStudent"
+          OnSubmit="OnSave">
+
+
+    <div class="form-group">
+        <label for="txtStudentId">Student Id:</label>
+        <InputNumber @bind-Value="NewStudent.StudentId"
+                     class="form-control"
+                     id="txtStudentId" />
+    </div>
+
+    <div class="form-group">
+        <label for="txtFirstname">Firstname:</label>
+        <InputText @bind-Value="NewStudent.Firstname"
+                   class="form-control"
+                   id="txtFirstname" />
+    </div>
+
+    <div class="form-group">
+        <label for="txtLastname">Lastname:</label>
+        <InputText @bind-Value="NewStudent.Lastname"
+                   class="form-control"
+                   id="txtLastname" />
+    </div>
+
+    <div class="form-group">
+        <label for="txtBirthPlace">BirthPlace:</label>
+        <InputText @bind-Value="NewStudent.BirthPlace"
+                   class="form-control"
+                   id="txtBirthPlace" />
+    </div>
+
+    <div class="form-group">
+        <label for="txtBirthDate">BirthDate:</label>
+        <InputDate @bind-Value="NewStudent.BirthDate"
+                   class="form-control"
+                   id="txtBirthDate" />
+    </div>
+
+
+    <br />
+    <button type="submit" class="btn btn-primary">Insert</button>
+    <a class="btn btn-secondary" href="/">Cancel</a>
+    <hr />
+</EditForm>
+
+
+@code {
+
+    [SupplyParameterFromForm]
+    private Student NewStudent { get; set; } = new();
+
+    protected override void OnInitialized()
+    {
+
+    }
+
+    private async Task OnSave()
+    {
+        await Data.InsertStudentAsync(NewStudent);
+        Nav.NavigateTo("/");
+    }
+
+}

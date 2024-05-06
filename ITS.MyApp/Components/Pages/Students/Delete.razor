@@ -1,0 +1,44 @@
+﻿@page "/delete/{id:int}"
+@inject UrlService Data
+@inject NavigationManager Nav
+
+<h3>Delete</h3>
+
+<EditForm Model="this"
+          FormName="DeleteUrl"
+          OnSubmit="OnDelete">
+    @if (_url is not null)
+    {
+        <div class="alert alert-danger" role="alert">
+            Sicuro di voler cancellare url "@_url.Id"?
+
+            <button type="submit" class="btn btn-danger">Yes</button>
+            <a class="btn btn-secondary" href="/">No</a>
+        </div>
+    }
+</EditForm>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private Url _url;
+
+    [CascadingParameter]
+    private HttpContext HttpContext { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (HttpMethods.IsGet(HttpContext.Request.Method))
+        {
+            _url = await Data.GetUrlAsync(Id);
+        }
+    }
+
+    private async Task OnDelete()
+    {
+        await Data.DeleteUrlAsync(Id);
+        Nav.NavigateTo("/");
+    }
+
+}

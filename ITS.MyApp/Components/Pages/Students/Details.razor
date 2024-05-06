@@ -1,0 +1,26 @@
+﻿@page "/details/{id:int}"
+@inject UrlService Data
+
+<h3>@_url.Link</h3>
+<p>
+    id: <strong>@_url.Id</strong><br />
+    description: <strong>@_url.Description</strong><br />
+    category: <strong>@_url.CategoryId</strong>
+</p>
+
+<a class="btn btn-primary" href="/">Go to list</a>
+
+
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+
+    private Student? _url;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _url = await Data.GetUrlAsync(Id);
+    }
+}
+

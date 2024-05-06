@@ -10,13 +10,6 @@
 
 
     <div class="form-group">
-        <label for="txtStudentId">Student Id:</label>
-        <InputNumber @bind-Value="NewStudent.Id"
-                     class="form-control"
-                     id="txtStudentId" />
-    </div>
-
-    <div class="form-group">
         <label for="txtFirstname">Firstname:</label>
         <InputText @bind-Value="NewStudent.Firstname"
                    class="form-control"
@@ -42,6 +35,30 @@
         <InputDate @bind-Value="NewStudent.BirthDate"
                    class="form-control"
                    id="txtBirthDate" />
+    </div>
+    <div class="form-group">
+        <label for="txtFiscalCode">Fiscal Code:</label>
+        <InputText @bind-Value="NewStudent.FiscalCode"
+                   class="form-control"
+                   id="txtFiscalCode" />
+    </div>
+    <div class="form-group">
+        <label for="txtEmail">Email:</label>
+        <InputText @bind-Value="NewStudent.Email"
+                   class="form-control"
+                   id="txtEmail" />
+    </div>
+    <div class="form-group">
+        <label for="txtIban">IBAN:</label>
+        <InputText @bind-Value="NewStudent.Iban"
+                   class="form-control"
+                   id="txtIban" />
+    </div>
+    <div class="form-group">
+        <label for="txtCourseName">Course Name:</label>
+        <InputText @bind-Value="NewStudent.CourseName"
+                   class="form-control"
+                   id="txtCourseName" />
     </div>
 
 

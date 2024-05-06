@@ -69,7 +69,7 @@ public class StudentService
         await connection.OpenAsync();
 
         const string query = """
-            INSERT INTO students (id, firstname, lastname, birthplace, birthdate, fiscalcode, email, iban, coursename)
+            INSERT INTO students ( firstname, lastname, birthplace, birthdate, fiscalcode, email, iban, coursename)
             VALUES (@firstname, @lastname, @birthplace, @birthdate, @fiscalcode, @email, @iban, @coursename)
             """;
 

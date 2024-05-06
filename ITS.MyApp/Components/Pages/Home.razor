@@ -1,6 +1,6 @@
 ﻿@page "/"
 
-@inject UrlService Data
+@inject StudentService Data
 
 <PageTitle>Urls</PageTitle>
 
@@ -24,11 +24,11 @@
 }
 
 @code {
-    private IEnumerable<Url> _list = [];
+    private IEnumerable<Student> _list = [];
 
     protected override async Task OnInitializedAsync()
     {
-        _list = await Data.GetUrlAsync();
+        _list = await Data.GetStudentsAsync();
     }
 
 }

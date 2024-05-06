@@ -1,11 +1,12 @@
-﻿@page "/details/{id:int}"
-@inject UrlService Data
+﻿@page "/Students/details/{id:int}"
+@inject StudentService Data
 
-<h3>@_url.Link</h3>
+<h3>@_student.Id</h3>
 <p>
-    id: <strong>@_url.Id</strong><br />
-    description: <strong>@_url.Description</strong><br />
-    category: <strong>@_url.CategoryId</strong>
+    id: <strong>@_student.Id</strong><br />
+    Firstname: <strong>@_student.Firstname</strong><br />
+    Lastname: <strong>@_student.Lastname</strong>
+    Course: <strong>@_student.CourseName</strong>
 </p>
 
 <a class="btn btn-primary" href="/">Go to list</a>
@@ -16,11 +17,11 @@
     [Parameter]
     public int Id { get; set; }
 
-    private Student? _url;
+    private Student? _student;
 
     protected override async Task OnInitializedAsync()
     {
-        _url = await Data.GetUrlAsync(Id);
+        _student = await Data.GetStudentAsync(Id);
     }
 }
 

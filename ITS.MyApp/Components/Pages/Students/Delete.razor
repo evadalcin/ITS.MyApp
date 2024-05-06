@@ -1,16 +1,16 @@
-﻿@page "/delete/{id:int}"
-@inject UrlService Data
+﻿@page "/Students/delete/{id:int}"
+@inject StudentService Data
 @inject NavigationManager Nav
 
 <h3>Delete</h3>
 
 <EditForm Model="this"
-          FormName="DeleteUrl"
+          FormName="DeleteStudent"
           OnSubmit="OnDelete">
-    @if (_url is not null)
+    @if (_student is not null)
     {
         <div class="alert alert-danger" role="alert">
-            Sicuro di voler cancellare url "@_url.Id"?
+            Sicuro di voler cancellare Student "@_student.Id"?
 
             <button type="submit" class="btn btn-danger">Yes</button>
             <a class="btn btn-secondary" href="/">No</a>
@@ -22,7 +22,7 @@
     [Parameter]
     public int Id { get; set; }
 
-    private Url _url;
+    private Student _student;
 
     [CascadingParameter]
     private HttpContext HttpContext { get; set; } = default!;
@@ -31,13 +31,13 @@
     {
         if (HttpMethods.IsGet(HttpContext.Request.Method))
         {
-            _url = await Data.GetUrlAsync(Id);
+            _student = await Data.GetStudentAsync(Id);
         }
     }
 
     private async Task OnDelete()
     {
-        await Data.DeleteUrlAsync(Id);
+        await Data.DeleteStudentAsync(Id);
         Nav.NavigateTo("/");
     }
 

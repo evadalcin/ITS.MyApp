@@ -1,0 +1,33 @@
+﻿@page "/Students/List"
+@inject StudentService Data
+
+<PageTitle>Students</PageTitle>
+
+<h1>Students</h1>
+
+<a class="btn btn-primary"
+   href="/Students/create">Create new student</a>
+
+<hr />
+
+@foreach (var item in _list)
+{
+//TODO fa mejo grz <3
+    <div>
+        <h2>@item.Firstname</h2>
+        <p>Student Id: <strong>@item.</strong></p>
+        <a class="btn btn-primary" href="/Students/details/@item.Firstname">Details</a>
+        <a class="btn btn-primary" href="/Students/edit/@item.Lastname">Edit</a>
+        <a class="btn btn-primary" href="/Students/delete/@item.CourseName">Delete</a>
+    </div>
+    <hr />
+}
+
+@code {
+    private IEnumerable<Student> _list = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        _list = await Data.GetStudentsAsync();
+    }
+}

@@ -1,0 +1,33 @@
+﻿@page "/Tickets/details/{id:int}"
+@inject TicketService Data
+
+@if (_ticket is not null)
+{
+    <h3>@_ticket.TicketId</h3>
+    <p>
+        Id: <strong>@_ticket.TicketId</strong><br />
+        DeviceId: <strong>@_ticket.DeviceId</strong><br />
+        StartTime: <strong>@_ticket.StartTime</strong><br />
+        EndTime: <strong>@_ticket.EndTime</strong><br />
+        Ticketstate: <strong>@_ticket.Ticketstate</strong><br />
+        DeviceState: <strong>@_ticket.DeviceState</strong><br />
+        Description: <strong>@_ticket.Description</strong><br />
+        Title: <strong>@_ticket.Title</strong><br />
+    </p>
+    <a class="btn btn-primary" href="/">Go to list</a>
+}
+
+
+
+@code {
+
+    [Parameter]
+    public int Id { get; set; }
+
+    private Ticket _ticket;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _ticket = await Data.GetTicketAsync(Id);
+    }
+}

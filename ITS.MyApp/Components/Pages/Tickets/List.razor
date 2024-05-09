@@ -1,0 +1,33 @@
+﻿@page "/Tickets/List"
+@inject TicketService Data
+
+<PageTitle>Tickets</PageTitle>
+
+<h1>Tickets</h1>
+
+<a class="btn btn-primary"
+   href="/Tickets/create">Create new ticket</a>
+
+<hr />
+
+@foreach (var item in _list)
+{
+    //TODO fa mejo grz <3
+    <div>
+        <h2>@item.TicketId</h2>
+        <p>Ticket Id: <strong>@item.TicketId</strong></p>
+        <a class="btn btn-primary" href="/Tickets/details/@item.TicketId">Details</a>
+        <a class="btn btn-primary" href="/Tickets/edit/@item.TicketId">Edit</a>
+        <a class="btn btn-primary" href="/Tickets/delete/@item.TicketId">Delete</a>
+    </div>
+    <hr />
+}
+
+@code {
+    private IEnumerable<Ticket> _list = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        _list = await Data.GetTicketsAsync();
+    }
+}

@@ -1,0 +1,44 @@
+﻿@page "/Tickets/delete/{id:int}"
+@inject TicketService Data
+@inject NavigationManager Nav
+
+<h3>Delete</h3>
+
+<EditForm Model="this"
+          FormName="DeleteTicket"
+          OnSubmit="OnDelete">
+    @if (_ticket is not null)
+    {
+        <div class="alert alert-danger" role="alert">
+            Sicuro di voler cancellare il ticket "@_ticket.TicketId"?
+
+            <button type="submit" class="btn btn-danger">Yes</button>
+            <a class="btn btn-secondary" href="/">No</a>
+        </div>
+    }
+    </EditForm>
+
+    @code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private Ticket _ticket;
+
+    [CascadingParameter]
+    private HttpContext HttpContext { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (HttpMethods.IsGet(HttpContext.Request.Method))
+        {
+            _ticket = await Data.GetTicketAsync(Id);
+        }
+    }
+
+    private async Task OnDelete()
+    {
+        await Data.DeleteTicketAsync(Id);
+        Nav.NavigateTo("/");
+    }
+
+}

@@ -1,0 +1,84 @@
+﻿@page "/Tickets/create"
+@inject TicketService Data
+@inject NavigationManager Nav
+
+<h3>Create new ticket</h3>
+
+<EditForm Model="NewTicket"
+          FormName="CreateTicket"
+          OnSubmit="OnSave">
+
+
+    <div class="form-group">
+        <label for="txtDeviceId">DeviceId:</label>
+        <InputNumber @bind-Value="NewTicket.DeviceId"
+                   class="form-control"
+                   id="txtDeviceId" />
+    </div>
+
+    <div class="form-group">
+        <label for="txtStartTime">StartTime:</label>
+        <InputDate @bind-Value="NewTicket.StartTime"
+                   class="form-control"
+                   id="txtStartTime" />
+    </div>
+
+    <div class="form-group">
+        <label for="txtEndTime">EndTime:</label>
+        <InputDate @bind-Value="NewTicket.EndTime"
+                   class="form-control"
+                   id="txtEndTime" />
+    </div>
+
+    <div class="form-group">
+        <label for="txtTicketstate">Ticketstate:</label>
+        <InputText @bind-Value="NewTicket.Ticketstate"
+                   class="form-control"
+                   id="txtTicketstate" />
+    </div>
+
+    <div class="form-group">
+        <label for="txtDeviceState">DeviceState:</label>
+        <InputText @bind-Value="NewTicket.DeviceState"
+                   class="form-control"
+                   id="txtDeviceState" />
+    </div>
+
+    <div class="form-group">
+        <label for="txtDescription">Description:</label>
+        <InputText @bind-Value="NewTicket.Description"
+                   class="form-control"
+                   id="txtDescription" />
+    </div>
+
+    <div class="form-group">
+        <label for="txtTitle">Title:</label>
+        <InputText @bind-Value="NewTicket.Title"
+                   class="form-control"
+                   id="txtTitle" />
+    </div>
+
+    <br />
+    <button type="submit" class="btn btn-primary">Insert</button>
+    <a class="btn btn-secondary" href="/">Cancel</a>
+    <hr />
+</EditForm>
+
+
+@code {
+
+    [SupplyParameterFromForm]
+    private Ticket NewTicket { get; set; } = new();
+
+    protected override void OnInitialized()
+    {
+
+    }
+
+    private async Task OnSave()
+    {
+        await Data.InsertTicketAsync(NewTicket);
+        Nav.NavigateTo("/");
+    }
+
+}

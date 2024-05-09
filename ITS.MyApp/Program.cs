@@ -15,6 +15,8 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddScoped<StudentService>();
 
+builder.Services.AddScoped<TicketService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

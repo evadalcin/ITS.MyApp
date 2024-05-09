@@ -1,17 +1,25 @@
 ﻿@page "/"
+@inject StudentService StudentData
+@inject TicketService TicketData
 
-@inject StudentService Data
+<PageTitle>Its</PageTitle>
 
-<PageTitle>Urls</PageTitle>
-
-<h1>Urls</h1>
+<h1>Students</h1>
 
 <a class="btn btn-primary"
-   href="/create">Create new url</a>
+   href="/create">Create new student</a>
 
 <hr />
-@* 
-@foreach (var item in _list)
+
+<h1>Tickets</h1>
+
+<a class="btn btn-primary"
+   href="/Tickets/create">Create new ticket</a>
+
+<hr />
+
+@*
+@foreach (var item in _studentList)
 {
     <div>
         <h2>@item.</h2>
@@ -21,14 +29,17 @@
         <a class="btn btn-warning" href="/delete/@item.Id">Delete</a>
     </div>
     <hr />
-} *@
+}
+*@
 
 @code {
-    private IEnumerable<Student> _list = [];
+    private IEnumerable<Student> _studentList = [];
+    private IEnumerable<Ticket> _ticketList = [];
 
     protected override async Task OnInitializedAsync()
     {
-        _list = await Data.GetStudentsAsync();
+        _studentList = await StudentData.GetStudentsAsync();
+        _ticketList = await TicketData.GetTicketsAsync();
     }
 
 }

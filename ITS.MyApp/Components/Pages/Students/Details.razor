@@ -1,15 +1,18 @@
 ﻿@page "/Students/details/{id:int}"
 @inject StudentService Data
 
-<h3>@_student.Id</h3>
-<p>
-    id: <strong>@_student.Id</strong><br />
-    Firstname: <strong>@_student.Firstname</strong><br />
-    Lastname: <strong>@_student.Lastname</strong>
-    Course: <strong>@_student.CourseName</strong>
-</p>
+@if (_student is not null)
+{
+    <h3>@_student.Id</h3>
+    <p>
+        Id: <strong>@_student.Id</strong><br />
+        Firstname: <strong>@_student.Firstname</strong><br />
+        Lastname: <strong>@_student.Lastname</strong><br />
+        Course: <strong>@_student.CourseName</strong>
+    </p>
+    <a class="btn btn-primary" href="/">Go to list</a>
+}
 
-<a class="btn btn-primary" href="/">Go to list</a>
 
 
 @code {
@@ -17,7 +20,7 @@
     [Parameter]
     public int Id { get; set; }
 
-    private Student? _student;
+    private Student _student;
 
     protected override async Task OnInitializedAsync()
     {
